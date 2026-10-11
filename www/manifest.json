@@ -1,0 +1,14 @@
+{
+  "name": "R通行证",
+  "short_name": "R通行证",
+  "icons": [
+    {
+      "src": "/brand/rpass-favicon.png?v=20261007",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

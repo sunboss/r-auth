@@ -1,0 +1,27 @@
+
+services:
+  casdoor:
+    image: casbin/casdoor:4.18.0
+    container_name: casdoor
+    restart: unless-stopped
+    user: "0:0"
+    volumes:
+      - ./conf/app.conf:/conf/app.conf:ro
+      - ./www:/web/build/brand:ro
+    networks:
+      - traefik
+      - r_shared_db_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
+      - "traefik.http.routers.casdoor.rule=(Host(`auth.1234r.com`) || Host(`auth.1118.si`) || Host(`auth.1234r.com`))"
+      - "traefik.http.routers.casdoor.entrypoints=websecure"
+      - "traefik.http.routers.casdoor.tls=true"
+      - "traefik.http.routers.casdoor.tls.certresolver=myresolver"
+      - "traefik.http.services.casdoor.loadbalancer.server.port=8000"
+
+networks:
+  traefik:
+    external: true
+  r_shared_db_net:
+    external: true
